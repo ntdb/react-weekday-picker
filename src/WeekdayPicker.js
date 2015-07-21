@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import DayPicker from "react-day-picker";
-Utils = DayPicker.defaultProps.localeUtils;
+
+const Utils = DayPicker.defaultProps.localeUtils;
 
 const keys = {
   LEFT: 37,
