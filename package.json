@@ -1,6 +1,6 @@
 {
   "name": "react-weekday-picker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Customizable weekday picker component for React.js",
   "main": "./lib/WeekdayPicker.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ntdb/react-weekdayday-picker.git"
+    "url": "https://github.com/ntdb/react-weekday-picker.git"
   },
   "keywords": [
     "react",
@@ -25,9 +25,9 @@
   "author": "Nate Bailey",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ntdb/react-weekdayday-picker/issues"
+    "url": "https://github.com/ntdb/react-weekday-picker/issues"
   },
-  "homepage": "https://github.com/ntdb/react-weekdayday-picker",
+  "homepage": "https://github.com/ntdb/react-weekday-picker",
   "peerDependencies": {
     "react": "~0.13.x"
   },
