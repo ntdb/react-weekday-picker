@@ -59,7 +59,6 @@ class WeekdayPicker extends Component {
         style={style}
         role="widget"
         tabIndex={ tabIndex }
-        onKeyDown={ ::this.handleKeyDown }
       >
         { this.renderWeekDays() }
       </div>
@@ -107,6 +106,7 @@ class WeekdayPicker extends Component {
     }
     return (
       <div key={weekday} className={className} tabIndex={ tabIndex }
+        onKeyDown= { (e) => this.handleDayKeyDown(e, weekday, modifiers) }
         onMouseEnter= { onWeekdayMouseEnter ?
           (e) => this.handleWeekdayMouseEnter(e, weekday, modifiers) : null }
         onMouseLeave= { onWeekdayMouseLeave ?
@@ -123,17 +123,38 @@ class WeekdayPicker extends Component {
     );
   }
 
-  // Event handlers
-  handleKeyDown(e) {
-    switch (e.keyCode) {
-      case keys.LEFT:
-        this.showPreviousMonth();
-      break;
-      case keys.RIGHT:
-        this.showNextMonth();
-      break;
+  focusPreviousDay(dayNode) {
+    const body = dayNode.parentNode.parentNode.parentNode.parentNode;
+    let dayNodes = body.querySelectorAll(".DayPicker-Weekday:not(.DayPicker-Weekday--outside)");
+    let nodeIndex;
+    for (let i = 0; i < dayNodes.length; i++) {
+      if (dayNodes[i] === dayNode) {
+        nodeIndex = i;
+        break;
+      }
+    }
+    if (nodeIndex !== 0) {
+      dayNodes[nodeIndex - 1].focus();
     }
   }
+
+  focusNextDay(dayNode) {
+    const body = dayNode.parentNode.parentNode.parentNode.parentNode;
+    let dayNodes = body.querySelectorAll(".DayPicker-Weekday:not(.DayPicker-Weekday--outside)");
+    let nodeIndex;
+    for (let i = 0; i < dayNodes.length; i++) {
+      if (dayNodes[i] === dayNode) {
+        nodeIndex = i;
+        break;
+      }
+    }
+
+    if (nodeIndex !== dayNodes.length - 1) {
+      dayNodes[nodeIndex + 1].focus();
+    }
+  }
+
+  // Event handlers
 
   handleDayKeyDown(e, day, modifiers) {
     e.persist();
@@ -152,11 +173,11 @@ class WeekdayPicker extends Component {
       case keys.SPACE:
         e.preventDefault();
         e.stopPropagation();
-        if (this.props.onDayClick) {
-          this.handleDayClick(e, day, modifiers);
+        if (this.props.onWeekdayClick) {
+          this.handleWeekdayClick(e, day, modifiers);
         }
-        if (this.props.onDayTouchTap) {
-          this.handleDayTouchTap(e, day, modifiers);
+        if (this.props.onWeekdayTouchTap) {
+          this.handleWeekdayTouchTap(e, day, modifiers);
         }
       break;
     }
