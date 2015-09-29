@@ -105,7 +105,7 @@ class WeekdayPicker extends Component {
       }
     }
     return (
-      <div key={weekday} className={className} tabIndex={ tabIndex }
+      <button key={weekday} className={className} tabIndex={ tabIndex }
         onKeyDown= { (e) => this.handleDayKeyDown(e, weekday, modifiers) }
         onMouseEnter= { onWeekdayMouseEnter ?
           (e) => this.handleWeekdayMouseEnter(e, weekday, modifiers) : null }
@@ -119,7 +119,7 @@ class WeekdayPicker extends Component {
         <attr title={localeUtils.formatWeekdayLong(weekday, locale)}>
           { localeUtils.formatWeekdayShort(weekday, locale) }
         </attr>
-      </div>
+      </button>
     );
   }
 
