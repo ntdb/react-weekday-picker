@@ -1,6 +1,6 @@
 {
   "name": "react-weekday-picker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Customizable weekday picker component for React.js",
   "main": "./lib/WeekdayPicker.js",
   "scripts": {
