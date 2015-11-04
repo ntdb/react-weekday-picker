@@ -39,10 +39,6 @@ class WeekdayPicker extends Component {
     localeUtils: Utils
   }
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { locale, style, tabIndex } = this.props;
     let className = `WeekdayPicker DayPicker DayPicker--${locale}`;

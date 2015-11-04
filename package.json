@@ -1,6 +1,6 @@
 {
   "name": "react-weekday-picker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Customizable weekday picker component for React.js",
   "main": "./lib/WeekdayPicker.js",
   "scripts": {
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/ntdb/react-weekday-picker",
   "peerDependencies": {
-    "react": "~0.13.x"
+    "react": "~0.14.x"
   },
   "dependencies": {
-    "react-day-picker": "^1.0.1"
+    "react-day-picker": "^1.0.10"
   },
   "devDependencies": {
     "babel": "^5.6.4",
@@ -41,7 +41,7 @@
     "classlist-polyfill": "^1.0.1",
     "coveralls": "^2.11.2",
     "moment": "^2.10.3",
-    "react": "^0.13.3",
+    "react": "^0.14.2",
     "react-tap-event-plugin": "^0.1.7"
   }
 }
