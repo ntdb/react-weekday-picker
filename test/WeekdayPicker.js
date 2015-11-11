@@ -23,14 +23,14 @@ describe("WeekdayPicker", () => {
   });
 
   it ('runs modifiers', () => {
+    const cb = sinon.spy();
     const modifiers = {
-      'weekend': function (weekday) {
-        return weekday == 0 || weekday == 6;
-      }
+      'weekend': cb
     };
 
     const shallowRenderer = TestUtils.createRenderer();
     shallowRenderer.render(<WeekdayPicker modifiers={modifiers}/>);
+    expect(cb).to.have.been.callCount(7)
   });
 
 });

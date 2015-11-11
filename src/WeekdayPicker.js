@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from "react";
-import DayPicker from "react-day-picker";
-
-const Utils = DayPicker.defaultProps.localeUtils;
+import { localeUtils } from "react-day-picker/utils";
 
 const keys = {
   LEFT: 37,
@@ -36,7 +34,20 @@ class WeekdayPicker extends Component {
   static defaultProps = {
     tabIndex: 0,
     locale: "en",
-    localeUtils: Utils
+    localeUtils: localeUtils
+  }
+
+  getModifiersForDay(d, modifierFunctions) {
+    const modifiers = [];
+    if (modifierFunctions) {
+      for (const modifier in modifierFunctions) {
+        const func = modifierFunctions[modifier];
+        if (func(d)) {
+          modifiers.push(modifier);
+        }
+      }
+    }
+    return modifiers;
   }
 
   render() {
@@ -84,7 +95,7 @@ class WeekdayPicker extends Component {
     let modifiers = [];
 
     if (modifierFunctions) {
-      const customModifiers = Utils.getModifiersForDay(weekday, modifierFunctions);
+      const customModifiers = this.getModifiersForDay(weekday, modifierFunctions);
       modifiers = [...modifiers, ...customModifiers];
     }
 
