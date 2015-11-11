@@ -4,7 +4,9 @@
   "description": "Customizable weekday picker component for React.js",
   "main": "./lib/WeekdayPicker.js",
   "scripts": {
-    "prepublish": "babel ./src -d ./lib --source-maps"
+    "prepublish": "./node_modules/.bin/babel ./src -d ./lib --source-maps",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register --recursive --reporter spec",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -38,10 +40,17 @@
     "babel": "^5.6.4",
     "babel-core": "^5.6.4",
     "babel-eslint": "^3.1.17",
+    "chai": "^3.4.1",
     "classlist-polyfill": "^1.0.1",
     "coveralls": "^2.11.2",
+    "jsdom": "^7.0.2",
+    "mocha": "^2.2.5",
     "moment": "^2.10.3",
     "react": "^0.14.2",
-    "react-tap-event-plugin": "^0.1.7"
+    "react-addons-test-utils": "^0.14.2",
+    "react-tap-event-plugin": "^0.1.7",
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0",
+    "testdom": "^2.0.0"
   }
 }
