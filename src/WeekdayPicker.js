@@ -17,6 +17,7 @@ class WeekdayPicker extends Component {
     tabIndex: PropTypes.number,
 
     modifiers: PropTypes.object,
+    ariaModifier: PropTypes.string,
 
     locale: PropTypes.string,
     localeUtils: PropTypes.shape({
@@ -34,7 +35,8 @@ class WeekdayPicker extends Component {
   static defaultProps = {
     tabIndex: 0,
     locale: "en",
-    localeUtils: localeUtils
+    localeUtils: localeUtils,
+    ariaModifier: 'selected'
   }
 
   getModifiersForDay(d, modifierFunctions) {
@@ -101,6 +103,8 @@ class WeekdayPicker extends Component {
 
     className += modifiers.map(modifier => ` ${className}--${modifier}`).join("");
 
+    const ariaSelected = modifiers.indexOf(this.props.ariaModifier) > -1;
+
     const { onWeekdayMouseEnter, onWeekdayMouseLeave, onWeekdayTouchTap, onWeekdayClick }
       = this.props;
     let tabIndex = null;
@@ -122,6 +126,7 @@ class WeekdayPicker extends Component {
           (e) => this.handleWeekdayClick(e, weekday, modifiers) : null }
         onTouchTap= { onWeekdayTouchTap ?
           (e) => this.handleWeekdayTouchTap(e, weekday, modifiers) : null }
+        ariaSelected={ariaSelected}
       >
         <attr title={localeUtils.formatWeekdayLong(weekday, locale)}>
           { localeUtils.formatWeekdayShort(weekday, locale) }
