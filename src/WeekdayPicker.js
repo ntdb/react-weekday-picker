@@ -9,15 +9,13 @@ const keys = {
 };
 
 class WeekdayPicker extends Component {
-
   static propTypes = {
-
     className: PropTypes.string,
     style: PropTypes.object,
     tabIndex: PropTypes.number,
 
-    modifiers: PropTypes.object,
     ariaModifier: PropTypes.string,
+    modifiers: PropTypes.object,
 
     locale: PropTypes.string,
     localeUtils: PropTypes.shape({
@@ -26,25 +24,24 @@ class WeekdayPicker extends Component {
     }),
 
     onWeekdayClick: PropTypes.func,
-    onWeekdayTouchTap: PropTypes.func,
     onWeekdayMouseEnter: PropTypes.func,
-    onWeekdayMouseLeave: PropTypes.func
-
+    onWeekdayMouseLeave: PropTypes.func,
+    onWeekdayTouchTap: PropTypes.func,
   }
 
   static defaultProps = {
-    tabIndex: 0,
-    locale: "en",
+    ariaModifier: 'selected',
+    locale: 'en',
     localeUtils: localeUtils,
-    ariaModifier: 'selected'
+    tabIndex: 0,
   }
 
-  getModifiersForDay(d, modifierFunctions) {
+  getModifiersForDay(weekday, modifierFunctions) {
     const modifiers = [];
     if (modifierFunctions) {
       for (const modifier in modifierFunctions) {
         const func = modifierFunctions[modifier];
-        if (func(d)) {
+        if (func(weekday)) {
           modifiers.push(modifier);
         }
       }
@@ -65,11 +62,11 @@ class WeekdayPicker extends Component {
 
     return (
       <div className={className}
-        style={style}
         role="widget"
+        style={style}
         tabIndex={ tabIndex }
       >
-        { this.renderWeekDays() }
+        {this.renderWeekDays()}
       </div>
     );
   }
@@ -83,7 +80,7 @@ class WeekdayPicker extends Component {
       <div className="DayPicker-Month">
         <div className="DayPicker-Weekdays">
           <div>
-            { weekdays }
+            {weekdays}
           </div>
         </div>
       </div>
@@ -93,7 +90,7 @@ class WeekdayPicker extends Component {
   renderWeekday(weekday) {
     const { locale, localeUtils, modifiers: modifierFunctions } = this.props;
 
-    let className = "DayPicker-Weekday";
+    let className = 'DayPicker-Weekday';
     let modifiers = [];
 
     if (modifierFunctions) {
@@ -101,12 +98,17 @@ class WeekdayPicker extends Component {
       modifiers = [...modifiers, ...customModifiers];
     }
 
-    className += modifiers.map(modifier => ` ${className}--${modifier}`).join("");
+    className += modifiers.map(modifier => ` ${className}--${modifier}`).join('');
 
     const ariaSelected = modifiers.indexOf(this.props.ariaModifier) > -1;
 
-    const { onWeekdayMouseEnter, onWeekdayMouseLeave, onWeekdayTouchTap, onWeekdayClick }
-      = this.props;
+    const {
+      onWeekdayClick,
+      onWeekdayMouseEnter,
+      onWeekdayMouseLeave,
+      onWeekdayTouchTap,
+    } = this.props;
+
     let tabIndex = null;
     if (onWeekdayTouchTap || onWeekdayClick) {
       tabIndex = -1;
@@ -115,21 +117,35 @@ class WeekdayPicker extends Component {
         tabIndex = this.props.tabIndex;
       }
     }
+
+    let onClick = null;
+    if (onWeekdayClick) {
+      onClick = (e) => this.handleWeekdayClick(e, weekday, modifiers);
+    }
+    let onMouseEnter = null;
+    if (onWeekdayMouseEnter) {
+      onMouseEnter = (e) => this.handleWeekdayMouseEnter(e, weekday, modifiers);
+    }
+    let onMouseLeave = null;
+    if (onWeekdayMouseLeave) {
+      onMouseLeave = (e) => this.handleWeekdayMouseLeave(e, weekday, modifiers);
+    }
+    let onTouchTap = null;
+    if (onWeekdayTouchTap) {
+      onTouchTap = (e) => this.handleWeekdayTouchTap(e, weekday, modifiers)
+    }
+
     return (
-      <button key={weekday} className={className} tabIndex={ tabIndex }
-        onKeyDown= { (e) => this.handleDayKeyDown(e, weekday, modifiers) }
-        onMouseEnter= { onWeekdayMouseEnter ?
-          (e) => this.handleWeekdayMouseEnter(e, weekday, modifiers) : null }
-        onMouseLeave= { onWeekdayMouseLeave ?
-          (e) => this.handleWeekdayMouseLeave(e, weekday, modifiers) : null }
-        onClick= { onWeekdayClick ?
-          (e) => this.handleWeekdayClick(e, weekday, modifiers) : null }
-        onTouchTap= { onWeekdayTouchTap ?
-          (e) => this.handleWeekdayTouchTap(e, weekday, modifiers) : null }
+      <button key={weekday} className={className} tabIndex={tabIndex}
         aria-selected={ariaSelected}
+        onClick= {onClick}
+        onKeyDown={(e) => this.handleDayKeyDown(e, weekday, modifiers)}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave= {onMouseLeave}
+        onTouchTap= {onTouchTap}
       >
         <attr title={localeUtils.formatWeekdayLong(weekday, locale)}>
-          { localeUtils.formatWeekdayShort(weekday, locale) }
+          {localeUtils.formatWeekdayShort(weekday, locale)}
         </attr>
       </button>
     );
@@ -137,7 +153,7 @@ class WeekdayPicker extends Component {
 
   focusPreviousDay(dayNode) {
     const body = dayNode.parentNode.parentNode.parentNode.parentNode;
-    let dayNodes = body.querySelectorAll(".DayPicker-Weekday:not(.DayPicker-Weekday--outside)");
+    let dayNodes = body.querySelectorAll('.DayPicker-Weekday:not(.DayPicker-Weekday--outside)');
     let nodeIndex;
     for (let i = 0; i < dayNodes.length; i++) {
       if (dayNodes[i] === dayNode) {
@@ -152,7 +168,7 @@ class WeekdayPicker extends Component {
 
   focusNextDay(dayNode) {
     const body = dayNode.parentNode.parentNode.parentNode.parentNode;
-    let dayNodes = body.querySelectorAll(".DayPicker-Weekday:not(.DayPicker-Weekday--outside)");
+    let dayNodes = body.querySelectorAll('.DayPicker-Weekday:not(.DayPicker-Weekday--outside)');
     let nodeIndex;
     for (let i = 0; i < dayNodes.length; i++) {
       if (dayNodes[i] === dayNode) {
@@ -167,7 +183,6 @@ class WeekdayPicker extends Component {
   }
 
   // Event handlers
-
   handleDayKeyDown(e, day, modifiers) {
     e.persist();
     switch (e.keyCode) {
@@ -214,7 +229,6 @@ class WeekdayPicker extends Component {
     e.persist();
     this.props.onWeekdayMouseLeave(e, weekday, modifiers);
   }
-
 }
 
 export default WeekdayPicker;
