@@ -126,7 +126,7 @@ class WeekdayPicker extends Component {
           (e) => this.handleWeekdayClick(e, weekday, modifiers) : null }
         onTouchTap= { onWeekdayTouchTap ?
           (e) => this.handleWeekdayTouchTap(e, weekday, modifiers) : null }
-        ariaSelected={ariaSelected}
+        aria-selected={ariaSelected}
       >
         <attr title={localeUtils.formatWeekdayLong(weekday, locale)}>
           { localeUtils.formatWeekdayShort(weekday, locale) }
