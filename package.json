@@ -33,9 +33,6 @@
   "peerDependencies": {
     "react": "~0.14.x"
   },
-  "dependencies": {
-    "react-day-picker": "^1.0.10"
-  },
   "devDependencies": {
     "babel": "^5.6.4",
     "babel-core": "^5.6.4",

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from "react";
-import { localeUtils } from "react-day-picker/utils";
+import React, { Component, PropTypes } from 'react';
+import { localeUtils } from './utils';
 
 const keys = {
   LEFT: 37,
