@@ -1,5 +1,5 @@
 # react-weekday-picker
-[![build status](https://img.shields.io/travis/ntdb/react-day-picker/master.svg?style=flat-square)](https://travis-ci.org/ntdb/react-day-picker)
+[![build status](https://img.shields.io/travis/ntdb/react-weekday-picker/master.svg?style=flat-square)](https://travis-ci.org/ntdb/react-weekday-picker)
 [![npm version](https://img.shields.io/npm/v/react-weekday-picker.svg?style=flat-square)](https://www.npmjs.com/package/react-weekday-picker)
 [![npm downloads](https://img.shields.io/npm/dm/react-weekday-picker.svg?style=flat-square)](https://www.npmjs.com/package/react-weekday-picker)
 
