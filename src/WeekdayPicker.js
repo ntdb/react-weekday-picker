@@ -137,7 +137,7 @@ class WeekdayPicker extends Component {
 
     return (
       <button key={weekday} className={className} tabIndex={tabIndex}
-        aria-selected={ariaSelected}
+        aria-pressed={ariaSelected}
         onClick= {onClick}
         onKeyDown={(e) => this.handleDayKeyDown(e, weekday, modifiers)}
         onMouseEnter={onMouseEnter}
