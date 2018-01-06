@@ -47,5 +47,8 @@
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "testdom": "^2.0.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
   }
 }
