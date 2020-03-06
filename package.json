@@ -1,6 +1,6 @@
 {
   "name": "react-weekday-picker",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Customizable weekday picker component for React.js",
   "main": "./lib/WeekdayPicker.js",
   "scripts": {
@@ -47,5 +47,8 @@
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "testdom": "^2.0.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
   }
 }
